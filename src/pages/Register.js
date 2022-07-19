@@ -2,8 +2,8 @@ import React from "react";
 import { MdEmail } from "react-icons/md";
 import { FaUnlockAlt } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
-import { Checkbox } from "@material-tailwind/react";
 import Logo from "../components/Logo";
+import { Link } from "react-router-dom";
 
 function Register() {
   return (
@@ -38,12 +38,14 @@ function Register() {
           />
         </div>
         <div>
-          <Checkbox
-            className="flex justify-start flex-col items-center"
-            defaultChecked
-            color="indigo"
-            label="Remember me"
-          />
+          <h1 className="mt-4 text-sm">
+            Not A Member Yet?
+            <Link to={`/landing`} activeClassName="active">
+              <span className="text-purple-800 font-semibold px-2">
+                Register
+              </span>
+            </Link>
+          </h1>
           <Button
             size="lg"
             variant="gradient"
