@@ -2,6 +2,7 @@ import React from "react";
 
 function FormRow({ type, placeholder, name, value, onChange, faIcon }) {
   return (
+    //from tailwind alert
     <div className="inline-flex bg-gray-100 rounded border border-gray-200 mt-5">
       <div className="inline bg-gray-200 py-2 px-4 text-gray-600">{faIcon}</div>
       <input
@@ -17,3 +18,4 @@ function FormRow({ type, placeholder, name, value, onChange, faIcon }) {
 }
 
 export default FormRow;
+//exported to index.js

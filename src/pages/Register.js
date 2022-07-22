@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import { FaUnlockAlt } from "react-icons/fa";
-import { Logo, FormRow } from "../components/index";
+import { Logo, FormRow, Alert } from "../components/index";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 
@@ -10,6 +10,7 @@ const initialState = {
   email: "",
   password: "",
   isMember: true,
+  showAlert: false,
 };
 function Register() {
   const [values, setValues] = useState(initialState);
@@ -19,6 +20,10 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");
+  };
+
+  const toggleMember = () => {
+    setValues({ ...values, isMember: !values.isMember });
   };
   const faIcon1 = <CgProfile size={28} color={"blue"} />;
   const faIcon2 = <MdEmail size={28} color={"blue"} />;
@@ -30,20 +35,28 @@ function Register() {
         onSubmit={onSubmit}
         className=" container rounded-lg shadow-md max-w-md flex flex-col justify-center items-center bg-green-200 p-20 md:p-10 sm:p-5"
       >
-        <div className="p-5">
+        <div div className="p-5">
           <Logo />
         </div>
         <div>
-          <h1 className="text-purple-700 text-3xl"> Login</h1>
+          <div>
+            <h1 className="text-purple-700 text-3xl">
+              {values.isMember ? "Login" : "Register"}
+            </h1>
+          </div>
+          {values.showAlert && <Alert />}
         </div>
-        <FormRow
-          faIcon={faIcon1}
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={values.name}
-          onChange={onChange}
-        />
+        {!values.isMember && (
+          <FormRow
+            faIcon={faIcon1}
+            type="text"
+            placeholder="Name"
+            name="name"
+            value={values.name}
+            onChange={onChange}
+          />
+        )}
+
         <FormRow
           faIcon={faIcon2}
           type="email"
@@ -54,23 +67,23 @@ function Register() {
         />
         <FormRow
           faIcon={faIcon3}
-          type="text"
-          placeholder="Name"
-          name="name"
+          type="password"
+          placeholder="Password"
+          name="password"
           value={values.name}
           onChange={onChange}
         />
 
-        <div>
-          <h1 className="mt-4 text-sm">
-            Not A Member Yet?
-            <Link to={`/landing`} activeClassName="active">
-              <span className="text-purple-800 font-semibold px-2">
-                Register
-              </span>
-            </Link>
-          </h1>
-        </div>
+        <p>
+          {values.isMember ? "Not a member yet?" : "Already a member?"}
+          <button
+            type="button"
+            onClick={toggleMember}
+            className="btn px-2 text-purple-400 font-semibold py-2  my-2"
+          >
+            {values.isMember ? "Register" : "Login"}
+          </button>
+        </p>
         <button
           type="submit"
           size="lg"
